@@ -1,4 +1,4 @@
-=== Plugin Human Name ===
+=== Plugin Name ===
 Contributors: Anushka Rajasingha
 Donate link: #
 Tags: comments, spam
