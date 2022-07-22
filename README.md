@@ -33,7 +33,7 @@ For example, if your plugin is named 'example-me' then:
 * rename files from `plugin-name` to `example-me`
 * change `plugin_name` to `example_me`
 * change `plugin-name` to `example-me`
-* change `Plugin_Name` to `Example_Me`
+* change `Cwt_Integrations` to `Example_Me`
 * change `PLUGIN_NAME_` to `EXAMPLE_ME_`
 
 It's safe to activate the plugin at this point. 

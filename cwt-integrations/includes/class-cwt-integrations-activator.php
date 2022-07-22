@@ -5,8 +5,8 @@
  * @link       https://example.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  *
  * @todo This should probably be in one class together with Deactivator Class.
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Activator {
+class Cwt_Integrations_Activator {
 
 	/**
 	 * The $_REQUEST during plugin activation.
@@ -38,7 +38,7 @@ class Plugin_Name_Activator {
 	 * @access   private
 	 * @var      string    $plugin    The $_REQUEST['plugin'] value during plugin activation.
 	 */
-	private static $plugin = PLUGIN_NAME_BASE_NAME;
+	private static $plugin = CWTINT_BASE_NAME;
 
 	/**
 	 * Activate the plugin.

@@ -5,8 +5,8 @@
  * @link       https://example.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/admin
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/admin
  */
 
 /**
@@ -16,20 +16,20 @@
  * enqueue the admin-facing stylesheet and JavaScript.
  * As you add hooks and methods, update this description.
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/admin
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/admin
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Admin {
+class Cwt_Integrations_Admin {
 
 	/**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string    $cwt_integrations    The ID of this plugin.
 	 */
-	private $plugin_name;
+	private $cwt_integrations;
 
 	/**
 	 * The unique prefix of this plugin.
@@ -53,13 +53,13 @@ class Plugin_Name_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $cwt_integrations       The name of this plugin.
 	 * @param      string $plugin_prefix    The unique prefix of this plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $plugin_prefix, $version ) {
+	public function __construct( $cwt_integrations, $plugin_prefix, $version ) {
 
-		$this->plugin_name   = $plugin_name;
+		$this->cwt_integrations   = $cwt_integrations;
 		$this->plugin_prefix = $plugin_prefix;
 		$this->version = $version;
 
@@ -73,7 +73,7 @@ class Plugin_Name_Admin {
 	 */
 	public function enqueue_styles( $hook_suffix ) {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/plugin-name-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->cwt_integrations, plugin_dir_url( __FILE__ ) . 'css/cwt-integrations-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -85,7 +85,7 @@ class Plugin_Name_Admin {
 	 */
 	public function enqueue_scripts( $hook_suffix ) {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->cwt_integrations, plugin_dir_url( __FILE__ ) . 'js/cwt-integrations-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 

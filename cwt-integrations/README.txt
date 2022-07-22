@@ -1,14 +1,14 @@
 === Plugin Human Name ===
-Contributors: Your Name or Your Company Name
-Donate link: https://donate.tld/
+Contributors: Anushka Rajasingha
+Donate link: #
 Tags: comments, spam
-Requires at least: X.X
-Tested up to: X.X
+Requires at least: 5.7
+Tested up to: 5.7
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+This is a implementation of car wash  trade website additional modification.cd..
 
 == Description ==
 
@@ -43,9 +43,9 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Upload `cwt-integrations.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('pfx_hook'); ?>` in your templates
+1. Place `<?php do_action('cwti_hook'); ?>` in your templates
 
 == Frequently Asked Questions ==
 

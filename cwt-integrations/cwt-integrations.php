@@ -7,23 +7,23 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://example.com
+ * @link              https://www.upwork.com/freelancers/~01db8f676aa2d4d8de
  * @since             1.0.0
- * @package           Plugin_Name
+ * @package           Cwt_Integrations
  *
  * @wordpress-plugin
- * Plugin Name:       My Plugin Name
- * Plugin URI:        https://plugin.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       Car Wash Trade - Integration
+ * Plugin URI:        https://www.anushka.pro/wpplugins/Cwt_Integrations
+ * Description:       Plugin provides additional features to the cwt website
  * Version:           1.0.0
- * Author:            Your Name or Your Company Name
- * Requires at least: X.X
- * Requires PHP:      X.X
- * Tested up to:      X.X
- * Author URI:        https://example.com/
+ * Author:            Anushka K R
+ * Requires at least: 5.7
+ * Requires PHP:      7.0
+ * Tested up to:      7.0
+ * Author URI:        https://www.anushka.pro/
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
+ * Text Domain:       cwt-integrations
  * Domain Path:       /languages
  */
 
@@ -37,43 +37,43 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'CWTINT_VERSION', '1.0.0' );
 
 /**
  * Define the Plugin basename
  */
-define( 'PLUGIN_NAME_BASE_NAME', plugin_basename( __FILE__ ) );
+define( 'CWTINT_BASE_NAME', plugin_basename( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
  *
- * This action is documented in includes/class-plugin-name-activator.php
+ * This action is documented in includes/class-cwt-integrations-activator.php
  * Full security checks are performed inside the class.
  */
-function pfx_activate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
-	Plugin_Name_Activator::activate();
+function cwti_activate() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cwt-integrations-activator.php';
+	Cwt_Integrations_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  *
- * This action is documented in includes/class-plugin-name-deactivator.php
+ * This action is documented in includes/class-cwt-integrations-deactivator.php
  * Full security checks are performed inside the class.
  */
-function pfx_deactivate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+function cwti_deactivate() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cwt-integrations-deactivator.php';
+	Cwt_Integrations_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'pfx_activate' );
-register_deactivation_hook( __FILE__, 'pfx_deactivate' );
+register_activation_hook( __FILE__, 'cwti_activate' );
+register_deactivation_hook( __FILE__, 'cwti_deactivate' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-cwt-integrations.php';
 
 /**
  * Begins execution of the plugin.
@@ -87,10 +87,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
  *
  * @since    1.0.0
  */
-function pfx_run() {
+function cwti_run() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new Cwt_Integrations();
 	$plugin->run();
 
 }
-pfx_run();
+cwti_run();

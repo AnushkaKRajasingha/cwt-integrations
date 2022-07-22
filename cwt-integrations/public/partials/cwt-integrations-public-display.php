@@ -7,8 +7,8 @@
  * @link       https://example.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/public/partials
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/public/partials
  */
 
 ?>

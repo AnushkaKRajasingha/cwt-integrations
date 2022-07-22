@@ -8,8 +8,8 @@
  * @link       https://example.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/includes
  */
 
 /**
@@ -22,11 +22,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Cwt_Integrations
+ * @subpackage Cwt_Integrations/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name {
+class Cwt_Integrations {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -34,7 +34,7 @@ class Plugin_Name {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Plugin_Name_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Cwt_Integrations_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -43,9 +43,9 @@ class Plugin_Name {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string    $cwt_integrations    The string used to uniquely identify this plugin.
 	 */
-	protected $plugin_name;
+	protected $cwt_integrations;
 
 	/**
 	 * The unique prefix of this plugin.
@@ -76,9 +76,9 @@ class Plugin_Name {
 	 */
 	public function __construct() {
 
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
+		if ( defined( 'CWTINT_VERSION' ) ) {
 
-			$this->version = PLUGIN_NAME_VERSION;
+			$this->version = CWTINT_VERSION;
 
 		} else {
 
@@ -86,8 +86,8 @@ class Plugin_Name {
 
 		}
 
-		$this->plugin_name = 'plugin-name';
-		$this->plugin_prefix = 'pfx_';
+		$this->cwt_integrations = 'cwt-integrations';
+		$this->plugin_prefix = 'cwti_';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -101,10 +101,10 @@ class Plugin_Name {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Plugin_Name_Loader. Orchestrates the hooks of the plugin.
-	 * - Plugin_Name_i18n. Defines internationalization functionality.
-	 * - Plugin_Name_Admin. Defines all hooks for the admin area.
-	 * - Plugin_Name_Public. Defines all hooks for the public side of the site.
+	 * - Cwt_Integrations_Loader. Orchestrates the hooks of the plugin.
+	 * - Cwt_Integrations_i18n. Defines internationalization functionality.
+	 * - Cwt_Integrations_Admin. Defines all hooks for the admin area.
+	 * - Cwt_Integrations_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -118,33 +118,33 @@ class Plugin_Name {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cwt-integrations-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-plugin-name-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cwt-integrations-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-plugin-name-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cwt-integrations-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-plugin-name-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cwt-integrations-public.php';
 
-		$this->loader = new Plugin_Name_Loader();
+		$this->loader = new Cwt_Integrations_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
+	 * Uses the Cwt_Integrations_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -152,7 +152,7 @@ class Plugin_Name {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Plugin_Name_I18n();
+		$plugin_i18n = new Cwt_Integrations_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -167,7 +167,7 @@ class Plugin_Name {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Plugin_Name_Admin( $this->get_plugin_name(), $this->get_plugin_prefix(), $this->get_version() );
+		$plugin_admin = new Cwt_Integrations_Admin( $this->get_cwt_integrations(), $this->get_plugin_prefix(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -183,13 +183,17 @@ class Plugin_Name {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Plugin_Name_Public( $this->get_plugin_name(), $this->get_plugin_prefix(), $this->get_version() );
+		$plugin_public = new Cwt_Integrations_Public( $this->get_cwt_integrations(), $this->get_plugin_prefix(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		$this->loader->add_action('init',$plugin_public,'custom_rewrite_basic');
+		$this->loader->add_filter('Progressive_services_args',$plugin_public , 'func_Progressive_services_args');
+		$this->loader->add_filter('post_type_link',$plugin_public,'replace_tax_value');
+
 		// Shortcode name must be the same as in shortcode_atts() third parameter.
-		$this->loader->add_shortcode( $this->get_plugin_prefix() . 'shortcode', $plugin_public, 'pfx_shortcode_func' );
+		$this->loader->add_shortcode( $this->get_plugin_prefix() . 'shortcode', $plugin_public, 'cwti_shortcode_func' );
 
 	}
 
@@ -209,8 +213,8 @@ class Plugin_Name {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
-		return $this->plugin_name;
+	public function get_cwt_integrations() {
+		return $this->cwt_integrations;
 	}
 
 	/**
@@ -227,7 +231,7 @@ class Plugin_Name {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Plugin_Name_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Cwt_Integrations_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

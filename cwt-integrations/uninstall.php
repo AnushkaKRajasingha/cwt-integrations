@@ -11,7 +11,7 @@
  * When populating this file, consider the following flow
  * of control:
  *
- * - Check if the $_REQUEST['plugin'] content actually is plugin-name/plugin-name.php
+ * - Check if the $_REQUEST['plugin'] content actually is cwt-integrations/cwt-integrations.php
  * - Check if the $_REQUEST['action'] content actually is delete-plugin
  * - Run a check_ajax_referer check to make sure it goes through authentication
  * - Run a current_user_can check to make sure current user can delete a plugin
@@ -20,7 +20,7 @@
  *
  * @link       https://example.com
  * @since      1.0.0
- * @package    Plugin_Name
+ * @package    Cwt_Integrations
  */
 
 /**
@@ -34,13 +34,13 @@
  *
  * @since 1.0.0
  */
-function pfx_uninstall() {
+function cwti_uninstall() {
 
 	if ( ! defined( 'WP_UNINSTALL_PLUGIN' )
 		|| empty( $_REQUEST )
 		|| ! isset( $_REQUEST['plugin'] )
 		|| ! isset( $_REQUEST['action'] )
-		|| 'plugin-name/plugin-name.php' !== $_REQUEST['plugin']
+		|| 'cwt-integrations/cwt-integrations.php' !== $_REQUEST['plugin']
 		|| 'delete-plugin' !== $_REQUEST['action']
 		|| ! check_ajax_referer( 'updates', '_ajax_nonce' )
 		|| ! current_user_can( 'activate_plugins' )
@@ -58,4 +58,4 @@ function pfx_uninstall() {
 
 }
 
-pfx_uninstall();
+cwti_uninstall();

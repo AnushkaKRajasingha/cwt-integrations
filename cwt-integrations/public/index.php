@@ -4,6 +4,6 @@
  *
  * It exists to stop directory listings on poorly configured servers.
  *
- * @package     Plugin_Name
- * @subpackage  Plugin_Name/public
+ * @package     Cwt_Integrations
+ * @subpackage  Cwt_Integrations/public
  */
