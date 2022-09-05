@@ -136,6 +136,7 @@ class Cwt_Integrations {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cwt-integrations-public.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cwt-integrations-slick.php';
 
 		$this->loader = new Cwt_Integrations_Loader();
 
@@ -172,6 +173,9 @@ class Cwt_Integrations {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		// Add action to initiate acf fields
+		$this->loader->add_action('acf/init', $plugin_admin,'admin_acf_fieldsby_cwt');
+
 	}
 
 	/**
@@ -191,6 +195,13 @@ class Cwt_Integrations {
 		$this->loader->add_action('init',$plugin_public,'custom_rewrite_basic');
 		$this->loader->add_filter('Progressive_services_args',$plugin_public , 'func_Progressive_services_args');
 		$this->loader->add_filter('post_type_link',$plugin_public,'replace_tax_value');
+
+		$plugin_slick = new Cwt_Integrations_Slick( $this->get_cwt_integrations(), $this->get_plugin_prefix(), $this->get_version() );
+        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_slick, 'enqueue_styles' );
+        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_slick, 'enqueue_scripts' );
+		/* customize frontpage footer */
+        $this->loader->add_action('wp_footer',$plugin_slick,'wp_footer');
+        $this->loader->add_action('wp_head',$plugin_slick,'wp_header');
 
 		// Shortcode name must be the same as in shortcode_atts() third parameter.
 		$this->loader->add_shortcode( $this->get_plugin_prefix() . 'shortcode', $plugin_public, 'cwti_shortcode_func' );

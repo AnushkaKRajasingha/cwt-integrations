@@ -1,0 +1,44 @@
+@charset "UTF-8";
+$default-color : #0D5DB5;
+$button-slick-arrow-width : 20px;
+
+button {
+  &.slick-arrow {
+    &.slick-prev{
+      left:-30px;
+    }
+    &.slick-prev,&.slick-next {
+      width: $button-slick-arrow-width;
+      z-index: 9999;
+    }
+    &:before {
+      color: $default-color;
+    }
+  }
+}
+
+.slick-dots {
+  li {
+    button {
+      &:before {
+        font-size: initial;
+      }
+    }
+    &.slick-active{
+      button{
+        &:before{
+          color: $default-color;
+        }
+      }
+    }
+  }
+}
+
+.featured-box{
+  .row{
+    &.slick-initialized{
+      display: flex !important;
+    }
+  }
+}
+
