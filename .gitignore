@@ -36,5 +36,5 @@ dwsync.xml
 .svn
 .CVS
 intermediate
-.idea
+../.idea
 cache
