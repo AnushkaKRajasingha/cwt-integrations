@@ -89,4 +89,7 @@ class Cwt_Integrations_Admin {
 
 	}
 
+	public function admin_acf_fieldsby_cwt(){
+    }
+
 }

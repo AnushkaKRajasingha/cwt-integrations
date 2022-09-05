@@ -6,21 +6,21 @@
  * @since      1.0.0
  *
  * @package    Cwt_Integrations
- * @subpackage Cwt_Integrations/public
+ * @subpackage Cwt_Integrations/slick
  */
 
 /**
- * The public-facing functionality of the plugin.
+ * The slickintegration functionality of the plugin.
  *
  * Defines the plugin name, version, and two hooks to
  * enqueue the public-facing stylesheet and JavaScript.
  * As you add hooks and methods, update this description.
  *
  * @package    Cwt_Integrations
- * @subpackage Cwt_Integrations/public
- * @author     Your Name <email@example.com>
+ * @subpackage Cwt_Integrations/slick
+ * @author     Anushka <wordpress@anushka.pro>
  */
-class Cwt_Integrations_Public {
+class Cwt_Integrations_Slick {
 
 	/**
 	 * The ID of this plugin.
@@ -72,10 +72,9 @@ class Cwt_Integrations_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->cwt_integrations, plugin_dir_url( __FILE__ ) . 'css/cwt-integrations-public.css', array(), $this->version, 'all' );
-
-       // wp_enqueue_style( $this->cwt_integrations.'_slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version, 'all' );
-       // wp_enqueue_style( $this->cwt_integrations.'_slick_theme', plugin_dir_url( __FILE__ ) . 'css/slick-theme.css', array(), $this->version, 'all' );
+       wp_enqueue_style( $this->cwt_integrations.'_slick', plugin_dir_url( __FILE__ ) . 'css/slick.css', array(), $this->version, 'all' );
+       wp_enqueue_style( $this->cwt_integrations.'_slick_theme', plugin_dir_url( __FILE__ ) . 'css/slick-theme.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->cwt_integrations.'_slick_custom', plugin_dir_url( __FILE__ ) . 'css/slick-custom.css', array(), $this->version, 'all' );
 
 	}
 
@@ -85,11 +84,7 @@ class Cwt_Integrations_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		wp_enqueue_script( $this->cwt_integrations, plugin_dir_url( __FILE__ ) . 'js/cwt-integrations-public.js', array( 'jquery' ), $this->version, true );
-
-       // wp_enqueue_script( $this->cwt_integrations.'_slick', plugin_dir_url( __FILE__ ) . 'js/slick.min.js', array( 'jquery' ), $this->version, true );
-
+	    wp_enqueue_script( $this->cwt_integrations.'_slick', plugin_dir_url( __FILE__ ) . 'js/slick.min.js', array( 'jquery' ), $this->version, true );
 	}
 
 	/**
@@ -145,50 +140,74 @@ class Cwt_Integrations_Public {
 
 	}
 
-
-
     /**
-     * Create custom rewrite url for carwash post type
-     * @see https://stackoverflow.com/questions/55890131/wordpress-url-rewrite-to-sync-custom-taxonomy-and-post-type
-     * @since 1.0.0
+     * Action hook function for wp_header by slick plugin integration
+     *
      */
-    public function custom_rewrite_basic(){
-        add_rewrite_rule('carwash/([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?carwash=$matches[3]&state=$matches[1]&carwash_type=$matches[2]', 'top');
-    }
-
-
-    /**
-     * Apply filter for modifying the post type slug with related taxonomy
-     * @param $args
-     * @return array
-     */
-    public function func_Progressive_services_args($args){
-        return array_merge(
-            $args,
-            array(
-                'rewrite' => array('slug' => 'carwash/%state%/%carwash_type%')
-            )
-        );
-    }
-
-
-    /**
-     * Replace terms tags acoording to their actual values.
-     * @param $post_link
-     * @param int $id
-     * @return string|string[]
-     */
-    public function replace_tax_value($post_link, $id = 0){
-        $post = get_post($id);
-        if ( is_object( $post ) ){
-            $terms_state = wp_get_object_terms( $post->ID, 'state' ); $terms_carwash_type = wp_get_object_terms( $post->ID, 'carwash_type' );
-            if( $terms_state && $terms_carwash_type ){
-                $post_link = str_replace( '%state%' , $terms_state[0]->slug , $post_link );
-                $post_link = str_replace( '%carwash_type%' , $terms_carwash_type[0]->slug , $post_link );
-                return $post_link;
+    public function wp_header(){
+        $enable_feat_carousel = get_field( "enable_feat_carousel" );
+        if ( is_front_page()  && $enable_feat_carousel) {
+            ?>
+            <style>
+                .featured-box .row{display: none;}
+            </style>
+                <?php
             }
+    }
+
+	/**
+     * Action hook function for wp_footer by slick plugin integration
+     *
+     */
+	public function wp_footer(){
+        $enable_feat_carousel = get_field( "enable_feat_carousel" );
+        $slidesinlg = get_field( "no_of_slides_1024" );  $slidesinlg = !empty($slidesinlg) ? $slidesinlg : 3;
+        $slidesin1024 = get_field( "no_of_slides_1023" ); $slidesin1024 = !empty($slidesin1024) ? $slidesin1024 : 3;
+        $slidesin768 = get_field( "no_of_slides_768" ); $slidesin768 = !empty($slidesin768) ? $slidesin768 : 2;
+        $slidesin480 = get_field( "no_of_slides_480" ); $slidesin480 = !empty($slidesin480) ? $slidesin480 : 1;
+       // var_dump(array($enable_feat_carousel,is_front_page(),is_home()));
+        if ( is_front_page()  && $enable_feat_carousel) {
+        ?>
+        <script type="text/javascript">
+            (function($) {
+                $(document).on('ready', function () {
+                    $(".featured-box .row").slick({
+                        dots: true,
+                        infinite: true,
+                        speed: 300,
+                        slidesToShow: <?php echo $slidesinlg; ?>,
+                        slidesToScroll: 1,
+                        responsive: [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: <?php echo $slidesin1024; ?>,
+                                    slidesToScroll: 1,
+                                    infinite: true,
+                                    dots: true
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: <?php echo $slidesin768; ?>,
+                                    slidesToScroll: 1
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: <?php echo $slidesin480; ?>,
+                                    slidesToScroll: 1
+                                }
+                            }
+                        ]
+                    });
+                });
+            })(jQuery);
+        </script>
+        <?php
         }
-        return $post_link;
     }
 
 }
