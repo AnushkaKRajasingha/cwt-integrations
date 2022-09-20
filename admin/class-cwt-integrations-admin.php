@@ -95,9 +95,11 @@ class Cwt_Integrations_Admin {
     public function cwt_manage_carwash_posts_columns($columns){
 
         $new_column['cb'] = $columns['cb'];
+        $new_column['title'] =  $columns['title'];
         $new_column['ar_id'] =  __( 'AR ID', $this->cwt_integrations );
         unset($columns['cb']);
-        $columns = array_merge($new_column,$columns);  
+        unset($columns['title']);
+        $columns = array_merge($new_column,$columns);
         return $columns;
     }
 
