@@ -92,4 +92,25 @@ class Cwt_Integrations_Admin {
 	public function admin_acf_fieldsby_cwt(){
     }
 
+    public function cwt_manage_carwash_posts_columns($columns){
+
+        $new_column['cb'] = $columns['cb'];
+        $new_column['title'] =  $columns['title'];
+        $new_column['ar_id'] =  __( 'AR ID', $this->cwt_integrations );
+        unset($columns['cb']);
+        unset($columns['title']);
+        $columns = array_merge($new_column,$columns);
+        return $columns;
+    }
+
+    public function cwt_manage_carwash_posts_custom_column( $column, $post_id ) {
+        switch ( $column ) {
+
+            case 'ar_id' :
+                echo get_post_meta( $post_id , 'ar_id' , true );
+                break;
+
+        }
+    }
+
 }
