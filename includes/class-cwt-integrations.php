@@ -203,6 +203,12 @@ class Cwt_Integrations {
         $this->loader->add_action('wp_footer',$plugin_slick,'wp_footer');
         $this->loader->add_action('wp_head',$plugin_slick,'wp_header');
 
+        $plugin_admin = new Cwt_Integrations_Admin( $this->get_cwt_integrations(), $this->get_plugin_prefix(), $this->get_version() );
+        $this->loader->add_filter('manage_carwash_posts_columns',$plugin_admin,'cwt_manage_carwash_posts_columns');
+        $this->loader->add_action('manage_carwash_posts_custom_column',$plugin_admin,'cwt_manage_carwash_posts_custom_column',10,2);
+
+
+
 		// Shortcode name must be the same as in shortcode_atts() third parameter.
 		$this->loader->add_shortcode( $this->get_plugin_prefix() . 'shortcode', $plugin_public, 'cwti_shortcode_func' );
 
